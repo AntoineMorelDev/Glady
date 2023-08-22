@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
+import { CombinationResponse } from '../models/combination-response.model';
+import { Observable } from 'rxjs/internal/Observable';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +13,11 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  searchCombination(optShopId?: number) {
-    const shopId: number = optShopId ? optShopId : ApiService.DEFAULT_SHOP_ID;
-    return this.http.get(environment.baseUrl + '/shop/' + shopId + '/search-combination');
+  searchCombination(amount: number, shopId: number = ApiService.DEFAULT_SHOP_ID): Observable<CombinationResponse> {
+    const httpOptions = {
+      params: new HttpParams().set('amount', amount?.toString() || '')
+    };
+
+    return this.http.get<CombinationResponse>(environment.baseUrl + '/shop/' + shopId + '/search-combination', httpOptions);
   }
 }
