@@ -7,12 +7,12 @@ import { environment } from '../../environments/environment';
 })
 export class ApiService {
 
-  private static readonly DEFAULT_SHOP_ID: number = 1;
+  private static readonly DEFAULT_SHOP_ID: number = 5;
 
   constructor(private http: HttpClient) { }
 
-  searchCombination(shopId?: number) {
-    shopId = shopId ? shopId : ApiService.DEFAULT_SHOP_ID;
+  searchCombination(optShopId?: number) {
+    const shopId: number = optShopId ? optShopId : ApiService.DEFAULT_SHOP_ID;
     return this.http.get(environment.baseUrl + '/shop/' + shopId + '/search-combination');
   }
 }
