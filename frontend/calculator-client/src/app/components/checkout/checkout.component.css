@@ -34,6 +34,25 @@
             font-size: 14px;
         }
 
+        .next-amounts {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+
+            .next-amounts-button {
+                margin-top: 8px;
+                color: #F90;
+                background-color: white;
+                border: none;
+                cursor: pointer;
+
+                &:disabled {
+                    color: #aaa;
+                    cursor: not-allowed;
+                }
+            }
+        }
+
         .amount-validation {
             text-align: center;
             margin-top: 36px;

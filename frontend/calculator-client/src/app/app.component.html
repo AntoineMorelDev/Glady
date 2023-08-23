@@ -1,3 +1,7 @@
 <div class="mobile-app">
-  <app-checkout [combinationResponse]="combinationResponse" (checkout)="checkout($event)"></app-checkout>
+  <app-checkout 
+  [combinationResponse]="combinationResponse"
+  (previousAmountCheckout)="previousAmount($event)"
+  (nextAmountCheckout)="nextAmount($event)"
+  (checkout)="checkout($event)"></app-checkout>
 </div>

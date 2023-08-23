@@ -6,6 +6,10 @@
     <div>
       <input class="amount-input-value" type="number" [(ngModel)]="amount"/>
     </div>
+    <div class="next-amounts">
+      <div><button class="next-amounts-button" (click)="previousAmount()" [disabled]="!combinationResponse.floor">← Previous amount</button></div>
+      <div><button class="next-amounts-button" (click)="nextAmount()" [disabled]="!combinationResponse.ceil">Next amount →</button></div>
+    </div>
     <div class="amount-validation">
       <button class="amount-validation-button" (click)="validateAmount()">PROCEED</button>
     </div>
