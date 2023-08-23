@@ -1,6 +1,8 @@
-.mobile-app {
-    width: 390px;
-    height: 844px;
+.mobile-app {    
+    max-width: 390px;
+    max-height: 844px;
+    height: 100%;
+    width: 100%;
     padding: 0 24px;
     border-radius: 30px;
     background: #FFF;
@@ -9,4 +11,5 @@
     background-size: cover;
     background-position: center center; 
     position: fixed;
+    overflow-y: auto
 }
