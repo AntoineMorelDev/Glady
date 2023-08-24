@@ -9,7 +9,7 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class ApiService {
 
-  private static readonly DEFAULT_SHOP_ID: number = 5;
+  static readonly DEFAULT_SHOP_ID: number = 5;
 
   constructor(private http: HttpClient) { }
 
