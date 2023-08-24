@@ -21,11 +21,11 @@ export class CheckoutComponent implements OnChanges {
       // Amount exist on the store : update the amount
       this.amount = this.combinationResponse.equal.value;
     } else if (this.combinationResponse?.floor?.value && !this.combinationResponse?.ceil?.value) {
-      // Max reached : update amount and validate
+      // Max reached : lower the amount and validate
       this.amount = this.combinationResponse.floor.value;
       this.validateAmount();
     } else if (this.combinationResponse?.ceil?.value && !this.combinationResponse?.floor?.value) {
-      // Min reached : update amount and validate
+      // Min reached : upgrade the amount and validate
       this.amount = this.combinationResponse.ceil.value;
       this.validateAmount();
     }
