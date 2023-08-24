@@ -1,9 +1,7 @@
 .mobile-app {    
-    max-width: 390px;
+    width: 390px;
     max-height: 844px;
     height: 100%;
-    width: 100%;
-    padding: 0 24px;
     border-radius: 30px;
     background: #FFF;
     box-shadow: 30px 40px 50px 0px rgba(25, 48, 85, 0.30);

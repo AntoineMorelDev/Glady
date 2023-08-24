@@ -1,14 +1,23 @@
-<div class="screen-title">Checkout</div>
-
+<div class="checkout">
+  <div class="screen-title">Checkout</div>
   <div class="amount">
     <div class="amount-title">Enter details</div>
     <div class="amount-input-label">Amount</div>
     <div>
       <input class="amount-input-value" type="number" [(ngModel)]="amount"/>
     </div>
+    <div *ngIf="amountNotAvailable" class="amount-not-available">The selected amount is not available</div>
     <div class="next-amounts">
-      <div><button class="next-amounts-button" (click)="previousAmount()" [disabled]="!combinationResponse.floor">← Previous amount</button></div>
-      <div><button class="next-amounts-button" (click)="nextAmount()" [disabled]="!combinationResponse.ceil">Next amount →</button></div>
+      <div>
+        <button class="next-amounts-button" (click)="previousAmount()" [disabled]="!combinationResponse.floor">
+        ← Previous amount <span *ngIf="combinationResponse.floor && !combinationResponse.equal">({{combinationResponse.floor.value}}€)</span>
+        </button>
+      </div>
+      <div>
+        <button class="next-amounts-button" (click)="nextAmount()" [disabled]="!combinationResponse.ceil">
+          Next amount <span *ngIf="combinationResponse.ceil && !combinationResponse.equal">({{combinationResponse.ceil.value}}€)</span> →
+        </button>
+      </div>
     </div>
     <div class="amount-validation">
       <button class="amount-validation-button" (click)="validateAmount()">PROCEED</button>
@@ -33,6 +42,8 @@
             </div>
           </div>
         </div>
+      </div>
     </div>
   </div>
+  
   

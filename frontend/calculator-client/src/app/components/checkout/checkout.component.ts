@@ -14,11 +14,23 @@ export class CheckoutComponent implements OnChanges {
   @Output() nextAmountCheckout: EventEmitter<number> = new EventEmitter<number>();
 
   amount: number = 0;
+  amountNotAvailable: boolean = false;
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     if (this.combinationResponse?.equal?.value) {
+      // Amount exist on the store : update the amount
       this.amount = this.combinationResponse.equal.value;
+    } else if (this.combinationResponse?.floor?.value && !this.combinationResponse?.ceil?.value) {
+      // Max reached : update amount and validate
+      this.amount = this.combinationResponse.floor.value;
+      this.validateAmount();
+    } else if (this.combinationResponse?.ceil?.value && !this.combinationResponse?.floor?.value) {
+      // Min reached : update amount and validate
+      this.amount = this.combinationResponse.ceil.value;
+      this.validateAmount();
     }
+
+    this.amountNotAvailable = !this.combinationResponse.equal && (!!this.combinationResponse.floor || !!this.combinationResponse.ceil);
   }
 
 
@@ -32,14 +44,5 @@ export class CheckoutComponent implements OnChanges {
   
   nextAmount(): void {
     this.nextAmountCheckout.next(this.amount);
-  }
-
-  updateAmountAndValidate(newAmount?: Combination): void {
-    if (newAmount?.value) {
-      this.amount = newAmount.value;
-      this.validateAmount();
-    } else {
-      console.error('Trying to update amount with null');
-    }
   }
 }
