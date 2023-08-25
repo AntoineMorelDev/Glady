@@ -1,0 +1,14 @@
+{
+    "CALCULATOR": {
+        "TITLE": "Calculator",
+        "AMOUNT-TITLE": "Enter details",
+        "AMOUNT-INPUT-LABEL": "Amount",
+        "PREVIOUS-AMOUNT": "← Previous amount",
+        "NEXT-AMOUNT": "Next amount →",
+        "AMOUNT-NOT-AVAILABLE": "The selected amount is not available",
+        "PROCEED": "PROCEED",
+        "CREDIT-CARD-TITLE": "Gift cards",
+        "CARD-NAME": "Name",
+        "CARD-VALIDITY": "Valid Till"
+    }
+}

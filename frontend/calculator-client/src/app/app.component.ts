@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 export class AppComponent {
   calculatorForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private translate: TranslateService, private fb: FormBuilder) {
+    translate.setDefaultLang('en');
+    translate.use('en');
+
     this.calculatorForm = this.fb.group({
       calculatorControl: [null]
     });  
