@@ -1,17 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { CalculatorComponentValue } from 'src/app/models/calculator-component-value.model';
 import { CombinationResponse } from 'src/app/models/combination-response.model';
 import { CalculatorService } from 'src/app/services/calculator.service';
 
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.component.html',
-  styleUrls: ['./calculator.component.css']
+  styleUrls: ['./calculator.component.css'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => CalculatorComponent),
+    multi: true
+  }]
 })
-export class CalculatorComponent {
+export class CalculatorComponent implements ControlValueAccessor {
 
   amount: number = 0;
   amountNotAvailable: boolean = false;
   combinationResponse: CombinationResponse = {};
+  private onChange = (value: CalculatorComponentValue) => {};
+  private onTouched = () => {};
 
   constructor(private calculatorService: CalculatorService) {
   }
@@ -52,5 +61,25 @@ export class CalculatorComponent {
     this.calculatorService.nextAmount(this.amount).subscribe(combinationResponse => {
       this.updateCombinationResponse(combinationResponse);
     });
+  }
+
+  // Below methods for reactives forms
+  writeValue(value: CalculatorComponentValue): void {
+    if (value) {
+      this.amount = value.value;
+      this.validateAmount();
+    }
+  }
+
+  registerOnChange(fn: (value: CalculatorComponentValue) => void): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: () => void): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    // Handle disabling if required
   }
 }

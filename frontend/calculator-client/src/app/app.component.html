@@ -1,3 +1,5 @@
 <div class="mobile-app">
-  <app-calculator></app-calculator>
+  <form [formGroup]="calculatorForm">
+    <app-calculator formControlName="calculatorControl"></app-calculator>
+  </form>
 </div>
