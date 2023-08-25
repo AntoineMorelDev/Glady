@@ -46,18 +46,27 @@ export class CalculatorComponent implements ControlValueAccessor {
 
 
   validateAmount(): void {
+    // Clean old response
+    this.combinationResponse = {};
+
     this.calculatorService.searchCombination(this.amount).subscribe(combinationResponse => {
       this.updateCombinationResponse(combinationResponse);
     });
   }
 
   previousAmount(): void {
+    // Clean old response
+    this.combinationResponse = {};
+
     this.calculatorService.previousAmount(this.amount).subscribe(combinationResponse => {
       this.updateCombinationResponse(combinationResponse);
     });
   }
   
   nextAmount(): void {
+    // Clean old response
+    this.combinationResponse = {};
+    
     this.calculatorService.nextAmount(this.amount).subscribe(combinationResponse => {
       this.updateCombinationResponse(combinationResponse);
     });

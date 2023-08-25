@@ -1,4 +1,5 @@
 .mobile-app {    
+    margin: 80px 0 0 40%; 
     width: 390px;
     max-height: 844px;
     height: 100%;
@@ -9,5 +10,23 @@
     background-size: cover;
     background-position: center center; 
     position: fixed;
-    overflow-y: auto
+    overflow-y: auto;
+
+    /* Scrollbar customization for firefox */
+    scrollbar-width: thin; 
+    scrollbar-color: rgba(255, 255, 255, 0.5) transparent;
+}
+
+/* scrollbar customization for chrome and edge */
+.mobile-app::-webkit-scrollbar {
+    width: 8px;
+}
+.mobile-app::-webkit-scrollbar-track {
+    background: transparent;
+}
+.mobile-app::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 4px; 
+    border: 2px solid transparent; 
+    background-clip: content-box;
 }
