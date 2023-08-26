@@ -2,7 +2,7 @@
 
 This repository contains my solution to the Glady Frontend Challenge. The challenge is focused on creating an Angular component that helps users find a combination of cards to reach a desired value in a store.
 
-![Video Presentation](https://github.com/AntoineMorelDev/Glady/blob/master/frontend/calculator-client/src/assets/img/presentation-calculator.gif?raw=true)
+![Video Presentation](https://github.com/AntoineMorelDev/Glady/blob/master/calculator-client/src/assets/img/presentation-calculator.gif?raw=true)
 
 
 ## Table of Contents
