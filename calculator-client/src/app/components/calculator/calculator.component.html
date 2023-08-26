@@ -10,12 +10,12 @@
     <div class="next-amounts">
       <div>
         <button class="next-amounts-button" (click)="previousAmount()" [disabled]="!combinationResponse.floor">
-          {{ 'CALCULATOR.PREVIOUS-AMOUNT' | translate }} <span *ngIf="combinationResponse.floor && !combinationResponse.equal">({{combinationResponse.floor.value}}€)</span>
+          ← {{ 'CALCULATOR.PREVIOUS-AMOUNT' | translate }} <span *ngIf="combinationResponse.floor && !combinationResponse.equal">({{combinationResponse.floor.value}}€)</span>
         </button>
       </div>
       <div>
         <button class="next-amounts-button" (click)="nextAmount()" [disabled]="!combinationResponse.ceil">
-          {{ 'CALCULATOR.NEXT-AMOUNT' | translate }} <span *ngIf="combinationResponse.ceil && !combinationResponse.equal">({{combinationResponse.ceil.value}}€)</span>
+          {{ 'CALCULATOR.NEXT-AMOUNT' | translate }} <span *ngIf="combinationResponse.ceil && !combinationResponse.equal">({{combinationResponse.ceil.value}}€)</span> →
         </button>
       </div>
     </div>

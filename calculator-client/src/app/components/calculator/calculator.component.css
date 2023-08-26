@@ -67,6 +67,7 @@
                     background-color: white;
                     border: none;
                     cursor: pointer;
+                    padding: 0;
     
                     &:disabled {
                         color: #aaa;
