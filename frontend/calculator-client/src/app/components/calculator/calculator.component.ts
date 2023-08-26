@@ -19,8 +19,8 @@ export class CalculatorComponent implements ControlValueAccessor {
   amount: number = 0;
   amountNotAvailable: boolean = false;
   combinationResponse: CombinationResponse = {};
-  private onChange = (value: CalculatorComponentValue) => {};
-  private onTouched = () => {};
+  onChange = (value: CalculatorComponentValue) => {};
+  onTouched = () => {};
 
   constructor(private calculatorService: CalculatorService) {
   }

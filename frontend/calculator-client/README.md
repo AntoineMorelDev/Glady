@@ -2,14 +2,17 @@
 
 This repository contains my solution to the Glady Frontend Challenge. The challenge is focused on creating an Angular component that helps users find a combination of cards to reach a desired value in a store.
 
+![Video Presentation](https://github.com/AntoineMorelDev/Glady/blob/master/frontend/calculator-client/src/assets/img/presentation-calculator.gif?raw=true)
+
+
 ## Table of Contents
 
 - [Features](#features)
 - [Installation](#installation)
+- [Running the Tests](#running-the-tests)
 - [Usage](#usage)
 - [API](#api)
 - [Contribution](#contribution)
-- [License](#license)
 
 ## Features
 
@@ -21,10 +24,14 @@ This repository contains my solution to the Glady Frontend Challenge. The challe
 
 ## Installation
 
+### Clone the repository
+
 1. Clone this repository:
     ```
     git clone https://github.com/AntoineMorelDev/Glady.git
     ```
+
+### Server side
 
 2. Navigate to the calculator-server directory:
     ```
@@ -41,46 +48,51 @@ This repository contains my solution to the Glady Frontend Challenge. The challe
     npm start
     ```
 
-## Usage
+### Client side
 
-1. Start the Angular app:
+5. Navigate to the calculator-client directory:
     ```
-    ng serve
-    ```
-
-2. Open your browser and navigate to `http://localhost:4200`.
-
-3. Use the provided interface to input your desired amount and see the card combinations.
-
-## API
-
-### Setting up the API
-
-Before using the API, make sure to set it up correctly:
-
-1. Navigate to the calculator-server directory:
-    ```
-    cd calculator-server
+    cd calculator-client
     ```
 
-2. Install the necessary packages:
+6. Install the necessary packages:
     ```
     npm install
     ```
 
-3. Start the API server:
+7. Start the client:
     ```
     npm start
     ```
 
-### Documentation
+## Running the Tests
 
-For a detailed explanation of the API and its endpoints, refer to the `calculator-server/doc.md` file.
+This application comes with a suite of tests that you can run to ensure everything is working as expected.
+
+1. To run the tests, navigate to the `calculator-client` directory:
+    ```
+    cd calculator-client
+    ```
+
+2. Run the tests using the Angular CLI:
+    ```
+    ng test
+    ```
+
+This will start the Karma test runner and run all the tests in the application. You will see the results of the tests in your terminal.
+
+
+## Usage
+
+1. Open your browser and navigate to `http://localhost:4200`.
+
+2. Use the provided interface to input your desired amount and see the card combinations.
+
+## API Documentation
+
+For a detailed explanation of the API and its endpoints, refer to the [`calculator-server/doc.md`](calculator-server/doc.md) file.
+
 
 ## Contribution
 
 Your feedback is welcome. If you have any issues or want to contribute, feel free to open a pull request or an issue.
-
-## License
-
-This project is licensed under the MIT License. Refer to the `LICENSE` file for detailed information.
