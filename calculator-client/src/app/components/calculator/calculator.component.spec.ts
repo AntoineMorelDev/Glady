@@ -1,96 +1,122 @@
-import { TestBed, async, ComponentFixture } from '@angular/core/testing';
+import { TestBed, ComponentFixture } from '@angular/core/testing';
 import { CalculatorComponent } from './calculator.component';
 import { CalculatorService } from 'src/app/services/calculator.service';
-import { NO_ERRORS_SCHEMA } from '@angular/core';
+import { CombinationResponse } from 'src/app/models/combination-response.model';
 import { of } from 'rxjs';
-import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-
-class CalculatorServiceStub {
-  searchCombination(amount: number) {
-    return of({});
-  }
-
-  previousAmount(amount: number) {
-    return of({});
-  }
-
-  nextAmount(amount: number) {
-    return of({});
-  }
-}
+import { ReactiveFormsModule } from '@angular/forms';
 
 describe('CalculatorComponent', () => {
   let component: CalculatorComponent;
   let fixture: ComponentFixture<CalculatorComponent>;
-  let calculatorService: CalculatorService;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [CalculatorComponent],
-      providers: [
-        { provide: CalculatorService, useClass: CalculatorServiceStub }
-      ],
-      schemas: [NO_ERRORS_SCHEMA],
-      imports: [FormsModule, TranslateModule.forRoot()]
-    }).compileComponents();
-  }));
+  let calculatorServiceSpy: jasmine.SpyObj<CalculatorService>;
 
   beforeEach(() => {
+    const spy = jasmine.createSpyObj('CalculatorService', ['searchCombination', 'previousAmount', 'nextAmount']);
+
+    TestBed.configureTestingModule({
+      declarations: [CalculatorComponent],
+      imports: [ReactiveFormsModule, TranslateModule.forRoot()],
+      providers: [{ provide: CalculatorService, useValue: spy }]
+    });
+
     fixture = TestBed.createComponent(CalculatorComponent);
     component = fixture.componentInstance;
-    calculatorService = TestBed.inject(CalculatorService);
-    fixture.detectChanges();
+    calculatorServiceSpy = TestBed.inject(CalculatorService) as jasmine.SpyObj<CalculatorService>;
   });
 
-  it('should create the calculator', () => {
+  it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should update the combination response', () => {
-    const combinationResponse = { equal: { value: 100, cards: [100] } };
+  it('should update combination response and set amount value when equal value is present', () => {
+    const combinationResponse: CombinationResponse = {
+      equal: { value: 5, cards: [5] }
+    };
+
     component.updateCombinationResponse(combinationResponse);
-    expect(component.amount).toEqual(100);
+    expect(component.amount.value).toEqual(5);
+    expect(component.amountNotAvailable).toEqual(false);
   });
 
-  it('should validate the amount', () => {
-    spyOn(calculatorService, 'searchCombination').and.returnValue(of({ equal: { value: 100, cards: [100] } }));
-    component.amount = 100;
+  it('should update combination response when validate amount', () => {
+    const combinationResponse: CombinationResponse = {
+      equal: { value: 10, cards: [10] }
+    };
+
+    calculatorServiceSpy.searchCombination.and.returnValue(of(combinationResponse));
+
+    component.amount.setValue(10);
     component.validateAmount();
-    expect(calculatorService.searchCombination).toHaveBeenCalledWith(100);
+
+    expect(calculatorServiceSpy.searchCombination).toHaveBeenCalledWith(10);
+    expect(component.combinationResponse).toEqual(combinationResponse);
   });
 
-  it('should get the previous amount', () => {
-    spyOn(calculatorService, 'previousAmount').and.returnValue(of({ equal: { value: 90, cards: [90] } }));
-    component.amount = 100;
-    component.previousAmount();
-    expect(calculatorService.previousAmount).toHaveBeenCalledWith(100);
-  });
+it('should update combination response update amountNotAvailable when only floor value is present', () => {
+  const combinationResponse: CombinationResponse = {
+    floor: { value: 7, cards: [7] }
+  };
 
-  it('should get the next amount', () => {
-    spyOn(calculatorService, 'nextAmount').and.returnValue(of({ equal: { value: 110, cards: [110] } }));
-    component.amount = 100;
-    component.nextAmount();
-    expect(calculatorService.nextAmount).toHaveBeenCalledWith(100);
-  });
+  calculatorServiceSpy.searchCombination.and.returnValue(of(combinationResponse));
 
-  it('should write the value', () => {
-    spyOn(component, 'validateAmount');
-    const calculatorComponentValue = { value: 100, cards: [100] };
-    component.writeValue(calculatorComponentValue);
-    expect(component.amount).toEqual(100);
-    expect(component.validateAmount).toHaveBeenCalled();
-  });
+  component.updateCombinationResponse(combinationResponse);
+  expect(component.amount.value).toEqual(7);
+  expect(component.amountNotAvailable).toEqual(true);
+});
 
-  it('should register onChange function', () => {
-    const fn = (value: any) => {};
-    component.registerOnChange(fn);
-    expect(component.onChange).toBe(fn);
-  });
+it('should update combination response and update amountNotAvailable when only ceil value is present', () => {
+  const combinationResponse: CombinationResponse = {
+    ceil: { value: 12, cards: [12] }
+  };
 
-  it('should register onTouched function', () => {
-    const fn = () => {};
-    component.registerOnTouched(fn);
-    expect(component.onTouched).toBe(fn);
+  calculatorServiceSpy.searchCombination.and.returnValue(of(combinationResponse));
+
+  component.updateCombinationResponse(combinationResponse);
+  expect(component.amount.value).toEqual(12);
+  expect(component.amountNotAvailable).toEqual(true);
+});
+
+it('should update previous amount and update combination response', () => {
+  const combinationResponse: CombinationResponse = {
+    equal: { value: 9, cards: [9] }
+  };
+
+  calculatorServiceSpy.previousAmount.and.returnValue(of(combinationResponse));
+
+  component.amount.setValue(10);
+  component.previousAmount();
+
+  expect(calculatorServiceSpy.previousAmount).toHaveBeenCalledWith(10);
+  expect(component.combinationResponse).toEqual(combinationResponse);
+});
+
+it('should update next amount and update combination response', () => {
+  const combinationResponse: CombinationResponse = {
+    equal: { value: 11, cards: [11] }
+  };
+
+  calculatorServiceSpy.nextAmount.and.returnValue(of(combinationResponse));
+
+  component.amount.setValue(10);
+  component.nextAmount();
+
+  expect(calculatorServiceSpy.nextAmount).toHaveBeenCalledWith(10);
+  expect(component.combinationResponse).toEqual(combinationResponse);
+});
+
+it('should write value and validate amount', () => {
+  const calculatorComponentValue = { value: 10, cards: [10] };
+
+  spyOn(component, 'validateAmount');
+
+  component.writeValue(calculatorComponentValue);
+
+  expect(component.amount.value).toEqual(10);
+  expect(component.validateAmount).toHaveBeenCalled();
+});
+
+  afterEach(() => {
+    fixture.destroy();
   });
 });

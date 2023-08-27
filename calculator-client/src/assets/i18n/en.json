@@ -6,6 +6,8 @@
         "PREVIOUS-AMOUNT": "Previous amount",
         "NEXT-AMOUNT": "Next amount",
         "AMOUNT-NOT-AVAILABLE": "The selected amount is not available",
+        "MIN-REACHED": "Minimum amount reached",
+        "MAX-REACHED": "Maximum amount reached",
         "PROCEED": "PROCEED",
         "CREDIT-CARD-TITLE": "Gift cards",
         "CARD-NAME": "Name",

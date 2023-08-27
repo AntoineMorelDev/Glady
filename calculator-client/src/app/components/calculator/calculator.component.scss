@@ -49,13 +49,15 @@
                 font-size: $font-size;
             }
 
-            .amount-not-available {
-                margin: $spacing-s 0;
-                font-style: italic;
-                width: 100%;
-                text-align: center;
-                color: $colors-warning;
-                font-weight: 400;
+            .amount-erros {
+                div {
+                    margin: $spacing-s 0;
+                    font-style: italic;
+                    width: 100%;
+                    text-align: center;
+                    color: $colors-warning;
+                    font-weight: 400;
+                }
             }
     
             .next-amounts {

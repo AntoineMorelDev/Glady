@@ -19,6 +19,8 @@ export class CalculatorComponent implements ControlValueAccessor {
   amount: FormControl<number> = new FormControl<number>(0) as FormControl<number>;
   amountNotAvailable: boolean = false;
   combinationResponse: CombinationResponse = {};
+  minReached: boolean = false;
+  maxReached: boolean = false;
   onChange = (value: CalculatorComponentValue) => {};
   onTouched = () => {};
 
@@ -31,17 +33,19 @@ export class CalculatorComponent implements ControlValueAccessor {
     if (newCombinationResponse?.equal?.value) {
       // Amount exist on the store : update the amount
       this.amount.setValue(newCombinationResponse.equal.value);
-    } else if (newCombinationResponse?.floor?.value && !this.combinationResponse?.ceil?.value) {
+    } else if (newCombinationResponse?.floor?.value && !this.combinationResponse?.ceil?.value && !this.maxReached) {
       // Max reached : lower the amount and validate
+      this.maxReached = true;
       this.amount.setValue(newCombinationResponse.floor.value);
-      this.validateAmount();
-    } else if (newCombinationResponse?.ceil?.value && !this.combinationResponse?.floor?.value) {
+      this.validateAmount(true);
+    } else if (newCombinationResponse?.ceil?.value && !this.combinationResponse?.floor?.value && !this.minReached) {
       // Min reached : upgrade the amount and validate
+      this.minReached = true;
       this.amount.setValue(newCombinationResponse.ceil.value);
-      this.validateAmount();
+      this.validateAmount(true);
     }
 
-    this.amountNotAvailable = !newCombinationResponse.equal && (!!newCombinationResponse.floor || !!newCombinationResponse.ceil);
+    this.amountNotAvailable = !newCombinationResponse?.equal && (!!newCombinationResponse?.floor || !!newCombinationResponse?.ceil);
 
       // Emit new CalculatorComponentValue
       this.onChange({
@@ -50,10 +54,19 @@ export class CalculatorComponent implements ControlValueAccessor {
       });
   }
 
-
-  validateAmount(): void {
+  cleanUserMessages() {
     // Clean old response
     this.combinationResponse = {};
+    this.amountNotAvailable = false;
+    this.minReached = false;
+    this.maxReached = false;
+  }
+
+
+  validateAmount(keepUserMessages: boolean = false): void {
+    if (!keepUserMessages) {
+      this.cleanUserMessages();
+    }
 
     this.calculatorService.searchCombination(this.amount.value).subscribe(combinationResponse => {
       this.updateCombinationResponse(combinationResponse);
@@ -61,8 +74,7 @@ export class CalculatorComponent implements ControlValueAccessor {
   }
 
   previousAmount(): void {
-    // Clean old response
-    this.combinationResponse = {};
+    this.cleanUserMessages();
 
     this.calculatorService.previousAmount(this.amount.value).subscribe(combinationResponse => {
       this.updateCombinationResponse(combinationResponse);
@@ -70,8 +82,7 @@ export class CalculatorComponent implements ControlValueAccessor {
   }
   
   nextAmount(): void {
-    // Clean old response
-    this.combinationResponse = {};
+    this.cleanUserMessages();
     
     this.calculatorService.nextAmount(this.amount.value).subscribe(combinationResponse => {
       this.updateCombinationResponse(combinationResponse);

@@ -19,8 +19,10 @@
         </button>
       </div>
     </div>
-    <div *ngIf="amountNotAvailable" class="amount-not-available">
-      <span>{{ 'CALCULATOR.AMOUNT-NOT-AVAILABLE' | translate }}</span>
+    <div class="amount-erros">
+      <div *ngIf="amountNotAvailable" >{{ 'CALCULATOR.AMOUNT-NOT-AVAILABLE' | translate }}</div>
+      <div *ngIf="minReached" >{{ 'CALCULATOR.MIN-REACHED' | translate }}</div>
+      <div *ngIf="maxReached" >{{ 'CALCULATOR.MAX-REACHED' | translate }}</div>
     </div>
     <div class="amount-validation">
       <button class="amount-validation-button" (click)="validateAmount()">{{ 'CALCULATOR.PROCEED' | translate }}</button>
