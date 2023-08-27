@@ -11,7 +11,13 @@ export class CalculatorService {
   constructor(private apiService: ApiService) { }
 
   searchCombination(amount: number): Observable<CombinationResponse> {
-      return this.apiService.searchCombination(amount);
+    return this.apiService.searchCombination(amount)
+      .pipe(
+        catchError(error => {
+          console.error('Error occurred:', error);
+          return of({});
+        })
+      );
   }
 
   previousAmount(amount: number): Observable<CombinationResponse> {

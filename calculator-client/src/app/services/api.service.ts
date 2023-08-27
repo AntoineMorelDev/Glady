@@ -3,6 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { CombinationResponse } from '../models/combination-response.model';
 import { Observable } from 'rxjs/internal/Observable';
+import { catchError, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,12 @@ export class ApiService {
       params: new HttpParams().set('amount', amount?.toString() || '')
     };
 
-    return this.http.get<CombinationResponse>(environment.baseUrl + '/shop/' + shopId + '/search-combination', httpOptions);
+    return this.http.get<CombinationResponse>(environment.baseUrl + '/shop/' + shopId + '/search-combination', httpOptions)
+      .pipe(
+        catchError(error => {
+            console.error('Error occurred:', error);
+            return of({});
+        })
+    );
   }
 }
