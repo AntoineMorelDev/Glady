@@ -24,8 +24,10 @@ export class CalculatorService {
     return this.apiService.searchCombination(amount - 1).pipe(
       switchMap(combinationResponse => {
         if (combinationResponse.equal?.value) {
+          // If (amount - 1) exist we return it
           return of(combinationResponse);
         } else if (combinationResponse.floor?.value) {
+          // Else we return the floor
           return this.apiService.searchCombination(combinationResponse.floor.value);
         } else {
           // Min reached
@@ -43,8 +45,10 @@ export class CalculatorService {
     return this.apiService.searchCombination(amount + 1).pipe(
       switchMap(combinationResponse => {
         if (combinationResponse.equal?.value) {
+          // If (amount + 1) exist we return it
           return of(combinationResponse);
         } else if (combinationResponse.ceil?.value) {
+          // Else we return the ceil
           return this.apiService.searchCombination(combinationResponse.ceil.value);
         } else {
           // Max reached

@@ -1,6 +1,8 @@
+@import '../../../variables';
+
 :host {
     .calculator {
-        padding: 0 24px 12px 24px;
+        padding: 0 $spacing-l $spacing-m $spacing-l;
 
         .screen-title {
             text-align: center;
@@ -10,7 +12,7 @@
         }
 
         .screen-subtitle {
-            margin-top: 8px;
+            margin-top: $spacing-s;
             text-align: center;
             font-size: 20px;
             font-weight: 300;
@@ -22,37 +24,37 @@
     
         .amount {
             border-radius: 15px;
-            background: #FFF;
-            margin: 48px 0 32px 0;
+            background: $colors-white;
+            margin: $spacing-xxl 0 $spacing-xl 0;
             padding: 25px;
     
             .amount-title {
-                color: #F90;
+                color: $colors-primary;
             }
     
             .amount-input-label {
-                margin-top: 32px;
+                margin-top: $spacing-xl;
                 color: rgba(0, 0, 0, 0.5);
                 font-weight: 300;
             }
             
             .amount-input-value {
-                margin-top: 8px;
+                margin-top: $spacing-s;
                 border: none;
                 border-bottom: 1px solid black;
                 outline: none;
                 color: #000;
-                font-weight: 600;
+                font-weight: $font-weight;
                 width: 100%;
-                font-size: 14px;
+                font-size: $font-size;
             }
 
             .amount-not-available {
-                margin: 8px 0;
+                margin: $spacing-s 0;
                 font-style: italic;
                 width: 100%;
                 text-align: center;
-                color: red;
+                color: $colors-warning;
                 font-weight: 400;
             }
     
@@ -62,9 +64,9 @@
                 justify-content: space-between;
     
                 .next-amounts-button {
-                    margin-top: 12px;
-                    color: #F90;
-                    background-color: white;
+                    margin-top: $spacing-m;
+                    color: $colors-primary;
+                    background-color: $colors-white;
                     border: none;
                     cursor: pointer;
                     padding: 0;
@@ -84,21 +86,21 @@
                     width: 196px;
                     padding: 11px 0;
                     border-radius: 40px;
-                    color: white;
-                    background-color: #F90;
+                    color: $colors-white;
+                    background-color: $colors-primary;
                     text-align: center;
-                    font-size: 14px;
-                    border: 1px solid #F90;
+                    font-size: $font-size;
+                    border: 1px solid $colors-primary;
                     cursor: pointer;
-                    font-weight: 600;
+                    font-weight: $font-weight;
                 }
             }
         }
     
     
         .credit-card-title {
-            color: #FFF;
-            font-size: 14px;
+            color: $colors-white;
+            font-size: $font-size;
             font-style: normal;
             font-weight: 400;
             line-height: normal;
@@ -114,7 +116,7 @@
             .credit-card {
                 position: relative;
                 overflow: hidden;
-                margin: 12px;
+                margin: $spacing-m;
                 background-image: url('/assets/img/credit-card-background1.png');
                 background-size: cover;
                 background-position: center center;     
@@ -124,7 +126,7 @@
                 padding: 25px;
                 box-sizing: border-box;
     
-                color: #FFF;
+                color: $colors-white;
                 text-transform: uppercase;
                 font-size: 16px;
                 line-height: 24.519px;
@@ -136,7 +138,7 @@
 
                 .card-number {
                     width: 100%;
-                    margin-top: 8px;
+                    margin-top: $spacing-s;
                 }
     
                 .name-and-validity {
