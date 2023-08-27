@@ -7,7 +7,7 @@ import { CalculatorService } from 'src/app/services/calculator.service';
 @Component({
   selector: 'app-calculator',
   templateUrl: './calculator.component.html',
-  styleUrls: ['./calculator.component.css'],
+  styleUrls: ['./calculator.component.scss'],
   providers: [{
     provide: NG_VALUE_ACCESSOR,
     useExisting: forwardRef(() => CalculatorComponent),
