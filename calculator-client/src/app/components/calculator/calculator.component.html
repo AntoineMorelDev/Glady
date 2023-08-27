@@ -5,7 +5,7 @@
     <div class="amount-title">{{ 'CALCULATOR.AMOUNT-TITLE' | translate }}</div>
     <div class="amount-input-label">{{ 'CALCULATOR.AMOUNT-INPUT-LABEL' | translate }}</div>
     <div>
-      <input class="amount-input-value" type="number" [(ngModel)]="amount"/>
+      <input class="amount-input-value" type="number" [formControl]="amount"/>
     </div>
     <div class="next-amounts">
       <div>
