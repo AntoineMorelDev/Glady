@@ -3,7 +3,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { CombinationResponse } from '../models/combination-response.model';
 import { Observable } from 'rxjs/internal/Observable';
-import { catchError, of } from 'rxjs';
+import { catchError, delay, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +21,7 @@ export class ApiService {
 
     return this.http.get<CombinationResponse>(environment.baseUrl + '/shop/' + shopId + '/search-combination', httpOptions)
       .pipe(
+        delay(1000), // Simulate response time
         catchError(error => {
             console.error('Error occurred:', error);
             return of({});

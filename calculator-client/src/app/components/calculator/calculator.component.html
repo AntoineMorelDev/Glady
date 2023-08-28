@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="amount-erros">
-      <div *ngIf="amountNotAvailable" >{{ 'CALCULATOR.AMOUNT-NOT-AVAILABLE' | translate }}</div>
+      <div *ngIf="amountNotAvailable && !minReached && !maxReached" >{{ 'CALCULATOR.AMOUNT-NOT-AVAILABLE' | translate }}</div>
       <div *ngIf="minReached" >{{ 'CALCULATOR.MIN-REACHED' | translate }}</div>
       <div *ngIf="maxReached" >{{ 'CALCULATOR.MAX-REACHED' | translate }}</div>
     </div>
@@ -30,25 +30,32 @@
   </div>
 
   <div class="credit-card-title">{{ 'CALCULATOR.CREDIT-CARD-TITLE' | translate }}</div>
-  <div *ngFor="let cardAmount of combinationResponse?.equal?.cards">
-    <div class="credit-card-title">{{ cardAmount }} €</div>
-    <div class="credit-cards-panel">
-        <div class="credit-card">
-          <div><img class="logo" src="/assets/img/mastercard.svg"/></div>
-          <div class="card-number">5142 - 8164 - 6526 - 2563</div>
-          <div class="name-and-validity">
-            <div>
-              <div class="label">{{ 'CALCULATOR.CARD-NAME' | translate }}</div>
-              <div>Jenner anne</div>
-            </div>
-            <div>
-              <div class="label">{{ 'CALCULATOR.CARD-VALIDITY' | translate }}</div>
-              <div>10/28</div>
+  <div *ngIf="!loading; else loadingTemplate">
+    <div *ngFor="let cardAmount of combinationResponse?.equal?.cards">
+      <div class="credit-card-title">{{ cardAmount }} €</div>
+      <div class="credit-cards-panel">
+          <div class="credit-card">
+            <div><img class="logo" src="/assets/img/mastercard.svg"/></div>
+            <div class="card-number">5142 - 8164 - 6526 - 2563</div>
+            <div class="name-and-validity">
+              <div>
+                <div class="label">{{ 'CALCULATOR.CARD-NAME' | translate }}</div>
+                <div>Jenner anne</div>
+              </div>
+              <div>
+                <div class="label">{{ 'CALCULATOR.CARD-VALIDITY' | translate }}</div>
+                <div>10/28</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     </div>
+  </div>
+  <ng-template #loadingTemplate>
+    <div class="loader-container">
+      <div class="loader"></div>
+    </div>
+  </ng-template>
   </div>
   
   

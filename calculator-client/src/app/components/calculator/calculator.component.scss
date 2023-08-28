@@ -171,9 +171,34 @@
                 animation: shiny 1.5s;
             }
         }
+
+        .loader-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+
+            .loader {
+                display: inline-block;
+                width: 80px;
+                height: 80px;
+              }
+              .loader:after {
+                content: " ";
+                display: block;
+                width: 34px;
+                height: 34px;
+                margin: 8px;
+                border-radius: 50%;
+                border: 6px solid $colors-primary;
+                border-color: $colors-primary transparent $colors-primary transparent;
+                animation: loader-animation 1.1s linear infinite;
+              }
+        }
     }
 }
 
+/* Shiny effect for mastercard */
 @keyframes shiny {
     0% {
       left: -100%;
@@ -181,5 +206,14 @@
     100% {
       left: 200%;
     }
-  }
+}
+
   
+@keyframes loader-animation {
+0% {
+    transform: rotate(0deg);
+}
+100% {
+    transform: rotate(360deg);
+}
+}

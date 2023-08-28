@@ -21,6 +21,7 @@ export class CalculatorComponent implements ControlValueAccessor {
   combinationResponse: CombinationResponse = {};
   minReached: boolean = false;
   maxReached: boolean = false;
+  loading: boolean = false;
   onChange = (value: CalculatorComponentValue) => {};
   onTouched = () => {};
 
@@ -68,7 +69,9 @@ export class CalculatorComponent implements ControlValueAccessor {
       this.cleanUserMessages();
     }
 
+    this.loading = true;
     this.calculatorService.searchCombination(this.amount.value).subscribe(combinationResponse => {
+      this.loading = false;
       this.updateCombinationResponse(combinationResponse);
     });
   }
@@ -76,7 +79,9 @@ export class CalculatorComponent implements ControlValueAccessor {
   previousAmount(): void {
     this.cleanUserMessages();
 
+    this.loading = true;
     this.calculatorService.previousAmount(this.amount.value).subscribe(combinationResponse => {
+      this.loading = false;
       this.updateCombinationResponse(combinationResponse);
     });
   }
@@ -84,7 +89,9 @@ export class CalculatorComponent implements ControlValueAccessor {
   nextAmount(): void {
     this.cleanUserMessages();
     
+    this.loading = true;
     this.calculatorService.nextAmount(this.amount.value).subscribe(combinationResponse => {
+      this.loading = false;
       this.updateCombinationResponse(combinationResponse);
     });
   }
